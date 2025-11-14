@@ -1,182 +1,168 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard - Admin Panel')
-@section('page-title', 'Dashboard')
-@section('page-description', 'Overview of your creative agency performance')
+@section('title', 'Admin Dashboard - Nepal Result System')
+@section('page-title', 'व्यवस्थापन ड्यासबोर्ड')
+@section('page-description', 'Nepal School Result Management System - मुख्य नियन्त्रण केन्द्र')
 
 @section('content')
-<!-- Stats Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    @foreach($data['stats'] as $stat)
-    <div class="admin-card p-6">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-sm font-medium text-gray-600">{{ $stat['title'] }}</p>
-                <p class="text-3xl font-bold text-gray-900">{{ $stat['value'] }}</p>
-                <p class="text-sm text-green-600 mt-1">
-                    <i class="fas fa-arrow-up"></i> {{ $stat['change'] }}
-                </p>
+<div class="space-y-6">
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl shadow-xl card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-blue-100 text-sm font-medium">कुल विद्यालयहरू</p>
+                    <p class="text-3xl font-bold">{{ number_format($data['total_schools']) }}</p>
+                </div>
+                <div class="bg-blue-400 p-3 rounded-full">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                    </svg>
+                </div>
             </div>
-            <div class="w-12 h-12 bg-gradient-to-r from-{{ $stat['color'] }}-500 to-{{ $stat['color'] }}-600 rounded-lg flex items-center justify-center">
-                <i class="{{ $stat['icon'] }} text-white text-xl"></i>
+        </div>
+
+        <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-2xl shadow-xl card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-green-100 text-sm font-medium">कुल विद्यार्थीहरू</p>
+                    <p class="text-3xl font-bold">{{ number_format($data['total_students']) }}</p>
+                </div>
+                <div class="bg-green-400 p-3 rounded-full">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-2xl shadow-xl card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-purple-100 text-sm font-medium">प्रकाशित परिणामहरू</p>
+                    <p class="text-3xl font-bold">{{ number_format($data['total_results']) }}</p>
+                </div>
+                <div class="bg-purple-400 p-3 rounded-full">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-2xl shadow-xl card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-orange-100 text-sm font-medium">प्रतीक्षारत अनुमोदन</p>
+                    <p class="text-3xl font-bold">{{ $data['pending_approvals'] }}</p>
+                </div>
+                <div class="bg-orange-400 p-3 rounded-full">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
-    @endforeach
-</div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-    <!-- Revenue Chart -->
-    <div class="admin-card p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-semibold text-gray-900">Monthly Revenue</h3>
-            <div class="flex space-x-2">
-                <button class="text-sm text-gray-500 hover:text-gray-700">6M</button>
-                <button class="text-sm text-purple-600 font-medium">1Y</button>
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- District Statistics Chart -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl card-hover">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">जिल्लाअनुसार तथ्याङ्क</h3>
+            <div style="width: 100%; height: 300px;">
+                <canvas id="districtChart" width="400" height="300"></canvas>
             </div>
         </div>
-        <div style="width: 100%; height: 300px;">
-            <canvas id="revenueChart"></canvas>
-        </div>
-    </div>
 
-    <!-- Project Status -->
-    <div class="admin-card p-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-6">Project Status Distribution</h3>
-        <div style="width: 100%; height: 300px; display: flex; justify-content: center; align-items: center;">
-            <canvas id="projectChart" style="max-width: 250px; max-height: 250px;"></canvas>
-        </div>
-    </div>
-</div>
-
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <!-- Recent Projects -->
-    <div class="admin-card p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-semibold text-gray-900">Recent Projects</h3>
-            <a href="{{ route('admin.projects') }}" class="text-sm text-purple-600 hover:text-purple-700 font-medium">View All</a>
-        </div>
-        <div class="space-y-4">
-            @foreach($data['recent_projects'] as $project)
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200">
-                <div class="flex-1">
-                    <h4 class="font-medium text-gray-900">{{ $project['name'] }}</h4>
-                    <p class="text-sm text-gray-600">{{ $project['client'] }}</p>
-                    <div class="mt-2">
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-500">Progress</span>
-                            <span class="font-medium">{{ $project['progress'] }}%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-                            <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300" style="width: {{ $project['progress'] }}%"></div>
-                        </div>
+        <!-- Recent Activities -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl card-hover">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">हालका गतिविधिहरू</h3>
+            <div class="space-y-4">
+                @foreach($data['recent_activities'] as $activity)
+                <div class="flex items-start space-x-3 p-3 bg-slate-50 rounded-lg">
+                    <div class="flex-shrink-0">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-slate-800">{{ $activity['action'] }}</p>
+                        <p class="text-sm text-slate-600">{{ $activity['school'] }}</p>
+                        <p class="text-xs text-slate-500">{{ $activity['time'] }}</p>
                     </div>
                 </div>
-                <div class="ml-4">
-                    <span class="px-3 py-1 text-xs rounded-full 
-                        {{ $project['status'] === 'Completed' ? 'bg-green-100 text-green-800' : 
-                           ($project['status'] === 'In Progress' ? 'bg-blue-100 text-blue-800' : 
-                           ($project['status'] === 'Review' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800')) }}">
-                        {{ $project['status'] }}
-                    </span>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
 
-    <!-- Team Activity -->
-    <div class="admin-card p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
-            <a href="{{ route('admin.team') }}" class="text-sm text-purple-600 hover:text-purple-700 font-medium">View Team</a>
+    <!-- District Performance Table -->
+    <div class="bg-white rounded-2xl shadow-xl card-hover">
+        <div class="p-6 border-b border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800">जिल्लाअनुसार प्रदर्शन</h3>
         </div>
-        <div class="space-y-4">
-            @foreach($data['team_activity'] as $activity)
-            <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition duration-200">
-                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-user text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="text-sm font-medium text-gray-900">{{ $activity['name'] }}</p>
-                    <p class="text-sm text-gray-600">{{ $activity['action'] }}</p>
-                    <p class="text-xs text-gray-500 mt-1">{{ $activity['time'] }}</p>
-                </div>
-            </div>
-            @endforeach
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-slate-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">जिल्ला</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">विद्यालयहरू</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">विद्यार्थीहरू</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">कार्य</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-slate-200">
+                    @foreach($data['district_stats'] as $district)
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-slate-900">{{ $district['district'] }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-slate-900">{{ number_format($district['schools']) }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-slate-900">{{ number_format($district['students']) }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-blue-600 hover:text-blue-900 transition-colors">विस्तार हेर्नुहोस्</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Revenue Chart
-    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-    new Chart(revenueCtx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Revenue ($)',
-                data: [45000, 52000, 48000, 61000, 55000, 67000, 59000, 73000, 68000, 75000, 82000, 89500],
-                borderColor: 'rgb(147, 51, 234)',
-                backgroundColor: 'rgba(147, 51, 234, 0.1)',
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return '$' + value.toLocaleString();
-                        }
-                    }
-                }
+// District Statistics Chart
+const ctx = document.getElementById('districtChart').getContext('2d');
+const districtChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [@foreach($data['district_stats'] as $district)'{{ $district['district'] }}',@endforeach],
+        datasets: [{
+            label: 'विद्यालयहरू',
+            data: [@foreach($data['district_stats'] as $district){{ $district['schools'] }},@endforeach],
+            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+            borderColor: 'rgb(59, 130, 246)',
+            borderWidth: 1
+        }, {
+            label: 'विद्यार्थीहरू (सयौं)',
+            data: [@foreach($data['district_stats'] as $district){{ round($district['students']/100) }},@endforeach],
+            backgroundColor: 'rgba(16, 185, 129, 0.5)',
+            borderColor: 'rgb(16, 185, 129)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    });
-
-    // Project Status Chart
-    const projectCtx = document.getElementById('projectChart').getContext('2d');
-    new Chart(projectCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['In Progress', 'Review', 'Planning', 'Completed'],
-            datasets: [{
-                data: [24, 8, 6, 45],
-                backgroundColor: [
-                    'rgb(147, 51, 234)',
-                    'rgb(236, 72, 153)',
-                    'rgb(245, 158, 11)',
-                    'rgb(34, 197, 94)'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        usePointStyle: true
-                    }
-                }
-            }
-        }
-    });
+    }
 });
 </script>
 @endsection

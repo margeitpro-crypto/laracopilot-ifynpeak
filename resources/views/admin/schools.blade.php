@@ -1,180 +1,173 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Schools Management')
-@section('page-description', 'Manage registered schools and their information')
+@section('title', 'Schools Management - Nepal Result System')
+@section('page-title', 'विद्यालय व्यवस्थापन')
+@section('page-description', 'दर्ता विद्यालयहरूको सूची र व्यवस्थापन')
 
 @section('content')
 <div class="space-y-6">
-    <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl p-6 shadow-xl hover-lift border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-school text-white text-2xl"></i>
-                </div>
-                <div class="text-right">
-                    <h3 class="text-3xl font-bold text-gray-800">{{ number_format($data['statistics']['total_schools']) }}</h3>
-                    <p class="text-gray-600 font-medium">Total Schools</p>
-                </div>
-            </div>
+    <!-- Header Actions -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800">विद्यालयहरूको सूची</h2>
+            <p class="text-slate-600">कुल {{ count($schools) }} विद्यालयहरू दर्ता छन्</p>
         </div>
-
-        <div class="bg-white rounded-2xl p-6 shadow-xl hover-lift border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-check-circle text-white text-2xl"></i>
-                </div>
-                <div class="text-right">
-                    <h3 class="text-3xl font-bold text-gray-800">{{ number_format($data['statistics']['active_schools']) }}</h3>
-                    <p class="text-gray-600 font-medium">Active Schools</p>
-                </div>
-            </div>
+        <div class="flex space-x-3">
+            <button class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-2 rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg">
+                नयाँ विद्यालय थप्नुहोस्
+            </button>
+            <button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg">
+                Export Excel
+            </button>
         </div>
+    </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-xl hover-lift border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-clock text-white text-2xl"></i>
-                </div>
-                <div class="text-right">
-                    <h3 class="text-3xl font-bold text-gray-800">{{ $data['statistics']['pending_approval'] }}</h3>
-                    <p class="text-gray-600 font-medium">Pending Approval</p>
-                </div>
+    <!-- Search and Filter -->
+    <div class="bg-white p-6 rounded-2xl shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">विद्यालयको नाम खोज्नुहोस्</label>
+                <input type="text" placeholder="विद्यालयको नाम..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
             </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 shadow-xl hover-lift border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-users text-white text-2xl"></i>
-                </div>
-                <div class="text-right">
-                    <h3 class="text-3xl font-bold text-gray-800">{{ number_format($data['statistics']['total_students']) }}</h3>
-                    <p class="text-gray-600 font-medium">Total Students</p>
-                </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">जिल्ला</label>
+                <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">सबै जिल्ला</option>
+                    <option value="kathmandu">काठमाडौं</option>
+                    <option value="pokhara">पोखरा</option>
+                    <option value="chitwan">चितवन</option>
+                    <option value="lalitpur">ललितपुर</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">स्थिति</label>
+                <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">सबै स्थिति</option>
+                    <option value="active">सक्रिय</option>
+                    <option value="pending">प्रतीक्षारत</option>
+                    <option value="inactive">निष्क्रिय</option>
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button class="w-full bg-gradient-to-r from-slate-600 to-slate-700 text-white px-4 py-2 rounded-lg hover:from-slate-700 hover:to-slate-800 transition-all duration-300">
+                    खोज्नुहोस्
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Schools Management -->
-    <div class="bg-white rounded-2xl shadow-xl border border-gray-100">
-        <div class="p-6 border-b border-gray-200">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800">Registered Schools</h3>
-                    <p class="text-gray-600">Manage and monitor all registered schools</p>
-                </div>
-                <div class="flex gap-3">
-                    <button class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-plus mr-2"></i>Add School
-                    </button>
-                    <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-download mr-2"></i>Export
-                    </button>
-                </div>
-            </div>
+    <!-- Schools Table -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gradient-to-r from-slate-700 to-slate-800 text-white">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">विद्यालयको नाम</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">कोड</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">जिल्ला</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">विद्यार्थीहरू</th>
+                        <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider">स्थापना</th>
+                        <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider">स्थिति</th>
+                        <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider">कार्य</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-slate-200">
+                    @foreach($schools as $school)
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                            {{ $school['id'] }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                                        <span class="text-sm font-medium text-white">{{ substr($school['name'], 0, 1) }}</span>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-slate-900">{{ $school['name'] }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900 font-mono">
+                            {{ $school['code'] }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                            {{ $school['district'] }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                {{ number_format($school['students']) }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
+                            {{ $school['established'] }} B.S.
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                            @if($school['status'] === 'Active')
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">सक्रिय</span>
+                            @elseif($school['status'] === 'Pending')
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-semibold">प्रतीक्षारत</span>
+                            @else
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-semibold">निष्क्रिय</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                            <div class="flex justify-center space-x-2">
+                                <button class="text-blue-600 hover:text-blue-900 transition-colors" title="विस्तार हेर्नुहोस्">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-green-600 hover:text-green-900 transition-colors" title="सम्पादन गर्नुहोस्">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900 transition-colors" title="मेटाउनुहोस्">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        <div class="p-6">
-            <!-- Search and Filter -->
-            <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="relative">
-                    <input type="text" placeholder="Search schools..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                </div>
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                    <option>All Locations</option>
-                    <option>Kathmandu</option>
-                    <option>Pokhara</option>
-                    <option>Lalitpur</option>
-                    <option>Chitwan</option>
-                </select>
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                    <option>All Status</option>
-                    <option>Active</option>
-                    <option>Pending</option>
-                    <option>Inactive</option>
-                </select>
+    <!-- Pagination -->
+    <div class="bg-white px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between">
+        <div class="flex-1 flex justify-between sm:hidden">
+            <button class="relative inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50">
+                अघिल्लो
+            </button>
+            <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50">
+                अर्को
+            </button>
+        </div>
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-slate-700">
+                    देखाइएको <span class="font-medium">1</span> देखि <span class="font-medium">{{ count($schools) }}</span> को <span class="font-medium">{{ count($schools) }}</span> परिणामहरू
+                </p>
             </div>
-
-            <!-- Schools Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-200">
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">School Details</th>
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">Location</th>
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">Students</th>
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">Established</th>
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">Status</th>
-                            <th class="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data['schools'] as $school)
-                        <tr class="border-b border-gray-100 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300">
-                            <td class="py-4 px-4">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                        <i class="fas fa-school text-white"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800">{{ $school['name'] }}</h4>
-                                        <p class="text-sm text-gray-600">ID: {{ $school['id'] }}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-4">
-                                <span class="text-gray-800">{{ $school['location'] }}</span>
-                            </td>
-                            <td class="py-4 px-4">
-                                <span class="font-semibold text-gray-800">{{ number_format($school['students']) }}</span>
-                            </td>
-                            <td class="py-4 px-4">
-                                <span class="text-gray-800">{{ $school['established'] }}</span>
-                            </td>
-                            <td class="py-4 px-4">
-                                @if($school['status'] == 'Active')
-                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Active</span>
-                                @else
-                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">Pending</span>
-                                @endif
-                            </td>
-                            <td class="py-4 px-4">
-                                <div class="flex space-x-2">
-                                    <button class="text-blue-600 hover:text-blue-800 transition-colors p-2 hover:bg-blue-50 rounded-lg">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="text-green-600 hover:text-green-800 transition-colors p-2 hover:bg-green-50 rounded-lg">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="text-red-600 hover:text-red-800 transition-colors p-2 hover:bg-red-50 rounded-lg">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-6 flex justify-between items-center">
-                <div class="text-sm text-gray-600">
-                    Showing 1 to 5 of {{ count($data['schools']) }} schools
-                </div>
-                <div class="flex space-x-2">
-                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                        <i class="fas fa-chevron-left"></i>
+            <div>
+                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                    <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50">
+                        अघिल्लो
                     </button>
-                    <button class="px-3 py-2 bg-blue-500 text-white rounded-lg">1</button>
-                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">2</button>
-                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">3</button>
-                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                        <i class="fas fa-chevron-right"></i>
+                    <button class="relative inline-flex items-center px-4 py-2 border border-slate-300 bg-blue-50 text-sm font-medium text-blue-600">
+                        1
                     </button>
-                </div>
+                    <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50">
+                        अर्को
+                    </button>
+                </nav>
             </div>
         </div>
     </div>

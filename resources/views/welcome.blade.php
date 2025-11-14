@@ -1,300 +1,237 @@
 @extends('layouts.app')
 
-@section('title', 'Creative Digital Agency - Transforming Ideas Into Digital Experiences')
+@section('title', 'Nepal School Result Management System')
 
 @section('content')
 <!-- Hero Section -->
-<section class="pt-20 pb-16 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 relative overflow-hidden">
-    <div class="absolute inset-0">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
-    </div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="text-center">
-            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 animate-on-scroll">
-                {{ $data['hero']['title'] }}
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto animate-on-scroll">
-                {{ $data['hero']['subtitle'] }}
-            </p>
-            <p class="text-lg text-gray-500 mb-12 max-w-2xl mx-auto animate-on-scroll">
-                {{ $data['hero']['description'] }}
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-on-scroll">
-                <a href="#contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition duration-300 shadow-lg hover:shadow-xl">
-                    {{ $data['hero']['cta_text'] }}
-                </a>
-                <a href="#portfolio" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-600 hover:text-white transform hover:scale-105 transition duration-300">
-                    View Our Work
-                </a>
-            </div>
-
-            <!-- Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-on-scroll">
-                @foreach($data['hero']['stats'] as $stat)
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">{{ $stat['number'] }}</div>
-                    <div class="text-gray-600">{{ $stat['label'] }}</div>
+<section class="bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white py-20">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center justify-between">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Nepal School Result 
+                    <span class="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Management System</span>
+                </h1>
+                <p class="text-xl text-blue-200 mb-8 leading-relaxed">
+                    नेपालका सबै विद्यालयहरूको परीक्षा परिणाम व्यवस्थापनको लागि एकीकृत डिजिटल प्लेटफर्म। 
+                    सरल, सुरक्षित र भरपर्दो परिणाम प्रकाशन प्रणाली।
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="{{ route('results') }}" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg transform hover:scale-105 text-center">
+                        परिणाम खोज्नुहोस्
+                    </a>
+                    <a href="{{ route('schools') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 text-center">
+                        विद्यालयहरू हेर्नुहोस्
+                    </a>
                 </div>
-                @endforeach
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="relative animate-float">
+                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-2xl shadow-2xl">
+                        <svg class="w-64 h-64 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Creative Services</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">We offer comprehensive digital solutions to help your business thrive in the modern digital landscape.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            @foreach($data['services'] as $service)
-            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-100 hover-scale animate-on-scroll">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mb-6">
-                    <i class="{{ $service['icon'] }} text-white text-2xl"></i>
+<!-- Stats Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="text-center card-hover bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl shadow-lg">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                    </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">{{ $service['title'] }}</h3>
-                <p class="text-gray-600 mb-6">{{ $service['description'] }}</p>
-                <ul class="space-y-2">
-                    @foreach($service['features'] as $feature)
-                    <li class="flex items-center text-sm text-gray-500">
-                        <i class="fas fa-check text-green-500 mr-2"></i>
-                        {{ $feature }}
-                    </li>
-                    @endforeach
-                </ul>
+                <h3 class="text-3xl font-bold text-blue-800 mb-2">{{ number_format($data['total_schools']) }}</h3>
+                <p class="text-blue-600 font-medium">दर्ता विद्यालयहरू</p>
+            </div>
+            <div class="text-center card-hover bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl shadow-lg">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-green-800 mb-2">{{ number_format($data['total_students']) }}</h3>
+                <p class="text-green-600 font-medium">कुल विद्यार्थीहरू</p>
+            </div>
+            <div class="text-center card-hover bg-gradient-to-br from-purple-50 to-pink-100 p-8 rounded-2xl shadow-lg">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-purple-800 mb-2">{{ number_format($data['total_results']) }}</h3>
+                <p class="text-purple-600 font-medium">प्रकाशित परिणामहरू</p>
+            </div>
+            <div class="text-center card-hover bg-gradient-to-br from-orange-50 to-red-100 p-8 rounded-2xl shadow-lg">
+                <div class="bg-gradient-to-r from-orange-500 to-red-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-orange-800 mb-2">{{ $data['success_rate'] }}%</h3>
+                <p class="text-orange-600 font-medium">सफलता दर</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-slate-800 mb-4">हाम्रा विशेषताहरू</h2>
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+                आधुनिक प्रविधिको प्रयोग गरी बनाइएको यो प्रणालीले विद्यालय, विद्यार्थी र अभिभावकहरूलाई सहज र सुरक्षित सेवा प्रदान गर्छ।
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover border border-slate-100">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">सुरक्षित प्रणाली</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    उच्च स्तरको सुरक्षा व्यवस्था र एन्क्रिप्सनको साथ विद्यार्थीहरूको व्यक्तिगत जानकारी र परिणामहरू सुरक्षित राखिन्छ।
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover border border-slate-100">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">द्रुत परिणाम</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    तत्काल परिणाम खोजी र प्रकाशन। विद्यार्थीहरूले आफ्ना परिणामहरू तुरुन्तै हेर्न र डाउनलोड गर्न सक्छन्।
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-xl card-hover border border-slate-100">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">विस्तृत रिपोर्ट</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    विद्यालय र जिल्लाका आधारमा विस्तृत प्रदर्शन रिपोर्ट र तथ्याङ्कहरू उपलब्ध छन्।
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Schools Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-slate-800 mb-4">उत्कृष्ट विद्यालयहरू</h2>
+            <p class="text-xl text-slate-600">उत्कृष्ट प्रदर्शन गर्ने विद्यालयहरूको सूची</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($data['featured_schools'] as $school)
+            <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-6 rounded-2xl shadow-lg card-hover border border-slate-100">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        {{ $school['grade'] }}
+                    </div>
+                    <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $school['name'] }}</h3>
+                <p class="text-slate-600 mb-2">📍 {{ $school['location'] }}</p>
+                <p class="text-slate-600">👥 {{ number_format($school['students']) }} विद्यार्थीहरू</p>
             </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Creative Digital Agency</h2>
-                <p class="text-lg text-gray-600 mb-6">
-                    We are a passionate team of creative professionals dedicated to transforming your ideas into stunning digital experiences. With over 5 years of experience in the industry, we've helped businesses of all sizes achieve their digital goals.
-                </p>
-                <p class="text-lg text-gray-600 mb-8">
-                    Our approach combines innovative design thinking with cutting-edge technology to deliver solutions that not only look amazing but also drive real business results.
-                </p>
-                
-                <div class="grid grid-cols-2 gap-6 mb-8">
-                    <div class="text-center p-6 bg-white rounded-xl shadow-lg">
-                        <div class="text-3xl font-bold gradient-text mb-2">150+</div>
-                        <div class="text-gray-600">Happy Clients</div>
-                    </div>
-                    <div class="text-center p-6 bg-white rounded-xl shadow-lg">
-                        <div class="text-3xl font-bold gradient-text mb-2">200+</div>
-                        <div class="text-gray-600">Projects Done</div>
-                    </div>
-                </div>
-
-                <a href="#contact" class="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition duration-300">
-                    Let's Work Together
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-            
-            <div class="animate-on-scroll">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop" alt="Our Team" class="rounded-2xl shadow-2xl">
-                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-heart text-white text-2xl"></i>
-                    </div>
-                </div>
+<!-- Recent Results Section -->
+<section class="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-slate-800 mb-4">हालका परिणामहरू</h2>
+            <p class="text-xl text-slate-600">नवीनतम प्रकाशित परीक्षा परिणामहरू</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gradient-to-r from-slate-700 to-slate-800 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left font-semibold">परीक्षा</th>
+                            <th class="px-6 py-4 text-left font-semibold">मिति</th>
+                            <th class="px-6 py-4 text-center font-semibold">स्थिति</th>
+                            <th class="px-6 py-4 text-center font-semibold">सफलता दर</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        @foreach($data['recent_results'] as $result)
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-slate-800">{{ $result['exam'] }}</td>
+                            <td class="px-6 py-4 text-slate-600">{{ $result['date'] }}</td>
+                            <td class="px-6 py-4 text-center">
+                                @if($result['published'])
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">प्रकाशित</span>
+                                @else
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">प्रतीक्षारत</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold text-slate-800">{{ $result['pass_rate'] }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Portfolio Section -->
-<section id="portfolio" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Featured Work</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Discover some of our most successful projects that showcase our expertise and creativity.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            @foreach($data['portfolio'] as $item)
-            <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-500 animate-on-scroll">
-                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <div class="text-sm font-medium text-purple-300 mb-2">{{ $item['category'] }}</div>
-                        <h3 class="text-lg font-bold mb-2">{{ $item['title'] }}</h3>
-                        <p class="text-sm opacity-90">{{ $item['description'] }}</p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <div class="text-center mt-12 animate-on-scroll">
-            <a href="#contact" class="inline-flex items-center border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-600 hover:text-white transform hover:scale-105 transition duration-300">
-                View All Projects
-                <i class="fas fa-arrow-right ml-2"></i>
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-800 via-indigo-800 to-purple-800 text-white">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-6">आजै सुरु गर्नुहोस्</h2>
+        <p class="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
+            Nepal School Result Management System मा आफ्नो विद्यालय दर्ता गर्नुहोस् र डिजिटल शिक्षा प्रणालीको हिस्सा बन्नुहोस्।
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                Admin Panel
+            </a>
+            <a href="{{ route('school.login') }}" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-orange-600 hover:to-red-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                School Login
+            </a>
+            <a href="{{ route('student.login') }}" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                Student Portal
             </a>
         </div>
     </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">What Our Clients Say</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Don't just take our word for it. Here's what our amazing clients have to say about working with us.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach($data['testimonials'] as $testimonial)
-            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 animate-on-scroll">
-                <div class="flex items-center mb-4">
-                    @for($i = 1; $i <= 5; $i++)
-                        <i class="fas fa-star {{ $i <= $testimonial['rating'] ? 'text-yellow-400' : 'text-gray-300' }}"></i>
-                    @endfor
-                </div>
-                <p class="text-gray-600 mb-6 italic">"{{ $testimonial['content'] }}"</p>
-                <div class="flex items-center">
-                    <img src="{{ $testimonial['image'] }}" alt="{{ $testimonial['name'] }}" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                        <div class="font-semibold text-gray-900">{{ $testimonial['name'] }}</div>
-                        <div class="text-sm text-gray-500">{{ $testimonial['position'] }}</div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Let's Start Your Project</h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Ready to transform your ideas into reality? Get in touch with us today and let's create something amazing together.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Contact Form -->
-            <div class="animate-on-scroll">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                        <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Service Needed</label>
-                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
-                            <option>Brand Design</option>
-                            <option>Web Development</option>
-                            <option>Mobile App</option>
-                            <option>Digital Marketing</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                        <textarea rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition duration-300 shadow-lg hover:shadow-xl">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="animate-on-scroll">
-                <div class="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-8 text-white">
-                    <h3 class="text-2xl font-bold mb-8">Get in Touch</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Visit Our Office</h4>
-                                <p class="opacity-90">123 Creative Street<br>Design City, DC 12345</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-phone text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Call Us</h4>
-                                <p class="opacity-90">+1 (555) 123-4567</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Email Us</h4>
-                                <p class="opacity-90">hello@creative.com</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-clock text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Business Hours</h4>
-                                <p class="opacity-90">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-8 border-t border-white/20">
-                        <h4 class="font-semibold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition duration-300">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<script>
+$(document).ready(function() {
+    // Add smooth animations on scroll
+    $(window).scroll(function() {
+        $('.card-hover').each(function() {
+            var elementTop = $(this).offset().top;
+            var elementBottom = elementTop + $(this).outerHeight();
+            var viewportTop = $(window).scrollTop();
+            var viewportBottom = viewportTop + $(window).height();
+            
+            if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                $(this).addClass('animate-fadeInUp');
+            }
+        });
+    });
+});
+</script>
 @endsection

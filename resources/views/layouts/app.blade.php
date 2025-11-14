@@ -1,83 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Creative Digital Agency - Transforming Ideas Into Digital Experiences')</title>
+    <title>@yield('title', 'Nepal School Result Management System')</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mukti:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .hover-scale {
-            transition: transform 0.3s ease;
-        }
-        .hover-scale:hover {
-            transform: scale(1.05);
-        }
+        body { font-family: 'Mukti', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 min-h-screen">
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-effect">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="text-2xl font-bold gradient-text">
-                        <i class="fas fa-palette mr-2"></i>Creative
-                    </a>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="{{ route('home') }}" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 hover:bg-white/20">Home</a>
-                        <a href="#about" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 hover:bg-white/20">About</a>
-                        <a href="#services" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 hover:bg-white/20">Services</a>
-                        <a href="#portfolio" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 hover:bg-white/20">Portfolio</a>
-                        <a href="#contact" class="text-gray-700 hover:text-purple-600 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 hover:bg-white/20">Contact</a>
-                        <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition duration-300 transform hover:scale-105">Admin Panel</a>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-800 via-indigo-800 to-purple-800 shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white p-3 rounded-full shadow-lg">
+                        <svg class="w-8 h-8 text-blue-800" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Nepal Result System</h1>
+                        <p class="text-blue-200 text-sm">विद्यालय परीक्षा परिणाम व्यवस्थापन प्रणाली</p>
                     </div>
                 </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="{{ route('home') }}" class="text-white hover:text-blue-200 transition-all duration-300 font-medium">गृह पृष्ठ</a>
+                    <a href="{{ route('about') }}" class="text-white hover:text-blue-200 transition-all duration-300 font-medium">हाम्रो बारे</a>
+                    <a href="{{ route('schools') }}" class="text-white hover:text-blue-200 transition-all duration-300 font-medium">विद्यालयहरू</a>
+                    <a href="{{ route('results') }}" class="text-white hover:text-blue-200 transition-all duration-300 font-medium">परिणामहरू</a>
+                    <a href="{{ route('contact') }}" class="text-white hover:text-blue-200 transition-all duration-300 font-medium">सम्पर्क</a>
+                    <div class="flex items-center space-x-3">
+                        <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 font-medium shadow-lg">Admin</a>
+                        <a href="{{ route('school.login') }}" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-red-700 transition-all duration-300 font-medium shadow-lg">School</a>
+                        <a href="{{ route('student.login') }}" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-300 font-medium shadow-lg">Student</a>
+                    </div>
+                </nav>
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-blue-900 px-6 py-4 hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="{{ route('home') }}" class="text-white hover:text-blue-200 transition-colors">गृह पृष्ठ</a>
+                <a href="{{ route('about') }}" class="text-white hover:text-blue-200 transition-colors">हाम्रो बारे</a>
+                <a href="{{ route('schools') }}" class="text-white hover:text-blue-200 transition-colors">विद्यालयहरू</a>
+                <a href="{{ route('results') }}" class="text-white hover:text-blue-200 transition-colors">परिणामहरू</a>
+                <a href="{{ route('contact') }}" class="text-white hover:text-blue-200 transition-colors">सम्पर्क</a>
+                <div class="flex flex-col space-y-2 pt-4 border-t border-blue-700">
+                    <a href="{{ route('admin.login') }}" class="bg-emerald-600 text-white px-4 py-2 rounded-lg text-center">Admin Panel</a>
+                    <a href="{{ route('school.login') }}" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-center">School Panel</a>
+                    <a href="{{ route('student.login') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-center">Student Portal</a>
                 </div>
             </div>
         </div>
-
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="md:hidden hidden glass-effect">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-lg text-base font-medium">Home</a>
-                <a href="#about" class="text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-lg text-base font-medium">About</a>
-                <a href="#services" class="text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-lg text-base font-medium">Services</a>
-                <a href="#portfolio" class="text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-lg text-base font-medium">Portfolio</a>
-                <a href="#contact" class="text-gray-700 hover:text-purple-600 block px-3 py-2 rounded-lg text-base font-medium">Contact</a>
-                <a href="{{ route('admin.login') }}" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white block px-3 py-2 rounded-lg text-base font-medium">Admin Panel</a>
-            </div>
-        </div>
-    </nav>
+    </header>
 
     <!-- Main Content -->
     <main>
@@ -85,125 +73,77 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-gray-900 via-purple-900 to-pink-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer class="bg-gradient-to-r from-slate-800 via-gray-800 to-slate-900 text-white mt-16">
+        <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div class="space-y-4">
-                    <h3 class="text-2xl font-bold gradient-text">Creative</h3>
-                    <p class="text-gray-300">Transforming ideas into stunning digital experiences that captivate audiences and drive business growth.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
-                            <i class="fab fa-facebook-f text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-300">सम्पर्क जानकारी</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p>शिक्षा मन्त्रालय, नेपाल सरकार</p>
+                        <p>सिंहदरबार, काठमाडौं</p>
+                        <p>फोन: +977-1-4200000</p>
+                        <p>इमेल: info@nepalresult.gov.np</p>
                     </div>
                 </div>
-
-                <!-- Quick Links -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white transition duration-300">Home</a></li>
-                        <li><a href="#about" class="text-gray-300 hover:text-white transition duration-300">About Us</a></li>
-                        <li><a href="#services" class="text-gray-300 hover:text-white transition duration-300">Services</a></li>
-                        <li><a href="#portfolio" class="text-gray-300 hover:text-white transition duration-300">Portfolio</a></li>
-                        <li><a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a></li>
-                    </ul>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-300">द्रुत लिंकहरू</h3>
+                    <div class="space-y-2">
+                        <a href="{{ route('home') }}" class="block text-gray-300 hover:text-blue-300 transition-colors">गृह पृष्ठ</a>
+                        <a href="{{ route('about') }}" class="block text-gray-300 hover:text-blue-300 transition-colors">हाम्रो बारे</a>
+                        <a href="{{ route('schools') }}" class="block text-gray-300 hover:text-blue-300 transition-colors">विद्यालयहरू</a>
+                        <a href="{{ route('results') }}" class="block text-gray-300 hover:text-blue-300 transition-colors">परिणामहरू</a>
+                    </div>
                 </div>
-
-                <!-- Services -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold">Services</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Brand Design</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Web Development</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Mobile Apps</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Digital Marketing</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">UI/UX Design</a></li>
-                    </ul>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-300">सेवाहरू</h3>
+                    <div class="space-y-2">
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">परिणाम खोज्नुहोस्</a>
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">विद्यालय दर्ता</a>
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">विद्यार्थी दर्ता</a>
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">सहायता केन्द्र</a>
+                    </div>
                 </div>
-
-                <!-- Contact -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold">Contact Info</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-map-marker-alt text-purple-400"></i>
-                            <span class="text-gray-300">123 Creative Street, Design City, DC 12345</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-phone text-purple-400"></i>
-                            <span class="text-gray-300">+1 (555) 123-4567</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-envelope text-purple-400"></i>
-                            <span class="text-gray-300">hello@creative.com</span>
-                        </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-300">सम्पर्क</h3>
+                    <div class="space-y-2">
+                        <a href="mailto:info@nepalresult.gov.np" class="block text-gray-300 hover:text-blue-300 transition-colors">इमेल पठाउनुहोस्</a>
+                        <a href="tel:+977-1-4200000" class="block text-gray-300 hover:text-blue-300 transition-colors">फोन गर्नुहोस्</a>
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">प्राविधिक सहायता</a>
+                        <a href="#" class="block text-gray-300 hover:text-blue-300 transition-colors">गुनासो दर्ता</a>
                     </div>
                 </div>
             </div>
-
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-300">&copy; {{ date('Y') }} Creative Digital Agency. All rights reserved.</p>
-                    <p class="text-gray-300 mt-2 md:mt-0">Made with ❤️ by LaraCopilot</p>
-                </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; {{ date('Y') }} Nepal School Result Management System. सर्वाधिकार सुरक्षित।</p>
+                <p class="text-gray-400 mt-2 md:mt-0">Made with ❤️ by LaraCopilot</p>
             </div>
         </div>
     </footer>
 
     <script>
-        $(document).ready(function() {
-            // Mobile menu toggle
-            $('#mobile-menu-button').click(function() {
-                $('#mobile-menu').toggleClass('hidden');
-            });
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
 
-            // Smooth scrolling for anchor links
-            $('a[href^="#"]').on('click', function(event) {
-                var target = $(this.getAttribute('href'));
-                if( target.length ) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top - 100
-                    }, 1000);
-                }
-            });
-
-            // Add scroll effect to navbar
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('nav').addClass('bg-white/90');
-                } else {
-                    $('nav').removeClass('bg-white/90');
-                }
-            });
-
-            // Add animation on scroll
-            function animateOnScroll() {
-                $('.animate-on-scroll').each(function() {
-                    var elementTop = $(this).offset().top;
-                    var elementBottom = elementTop + $(this).outerHeight();
-                    var viewportTop = $(window).scrollTop();
-                    var viewportBottom = viewportTop + $(window).height();
-                    
-                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                        $(this).addClass('animate-fadeInUp');
-                    }
-                });
+        // Smooth scrolling for anchor links
+        $('a[href^="#"]').on('click', function(event) {
+            var target = $(this.getAttribute('href'));
+            if( target.length ) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 100
+                }, 1000);
             }
+        });
 
-            $(window).scroll(animateOnScroll);
-            animateOnScroll();
+        // Add scroll effect to header
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('header').addClass('bg-opacity-95 backdrop-blur-sm');
+            } else {
+                $('header').removeClass('bg-opacity-95 backdrop-blur-sm');
+            }
         });
     </script>
 </body>

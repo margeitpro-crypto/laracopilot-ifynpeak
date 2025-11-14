@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Nepal Result System</title>
+    <title>Student Login - Nepal Result System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mukti:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Mukti', sans-serif; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<body class="bg-gradient-to-br from-purple-900 via-pink-900 to-indigo-900 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
         <div class="text-center">
-            <div class="mx-auto h-20 w-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-6">
+            <div class="mx-auto h-20 w-20 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center mb-6">
                 <svg class="h-10 w-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
                 </svg>
             </div>
-            <h2 class="text-3xl font-bold text-white mb-2">Admin Panel</h2>
-            <p class="text-blue-200">Nepal School Result Management System</p>
+            <h2 class="text-3xl font-bold text-white mb-2">Student Portal</h2>
+            <p class="text-purple-200">विद्यार्थी पोर्टल</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-2xl p-8">
-            <form action="/admin/login" method="POST" class="space-y-6">
+            <form action="/student/login" method="POST" class="space-y-6">
                 @csrf
                 <div>
-                    <label for="email" class="block text-sm font-medium text-slate-700 mb-2">इमेल ठेगाना</label>
-                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" placeholder="admin@nepalresult.gov.np">
+                    <label for="symbol" class="block text-sm font-medium text-slate-700 mb-2">Symbol Number</label>
+                    <input type="text" name="symbol" id="symbol" required class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors" placeholder="2081001">
                 </div>
 
                 <div>
                     <label for="password" class="block text-sm font-medium text-slate-700 mb-2">पासवर्ड</label>
-                    <input type="password" name="password" id="password" required class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" placeholder="••••••••">
+                    <input type="password" name="password" id="password" required class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors" placeholder="••••••••">
                 </div>
 
                 @if($errors->any())
@@ -48,7 +48,7 @@
                     </div>
                 @endif
 
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 shadow-lg">
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 shadow-lg">
                     लगइन गर्नुहोस्
                 </button>
             </form>
@@ -59,8 +59,10 @@
                     @foreach($credentials as $cred)
                     <div class="bg-slate-50 p-3 rounded-lg">
                         <p class="font-medium text-slate-800">{{ $cred['name'] }}</p>
-                        <p class="text-slate-600">Email: {{ $cred['email'] }}</p>
+                        <p class="text-slate-600">Symbol: {{ $cred['symbol'] }}</p>
                         <p class="text-slate-600">Password: {{ $cred['password'] }}</p>
+                        <p class="text-slate-600">Class: {{ $cred['class'] }}</p>
+                        <p class="text-slate-600">School: {{ $cred['school'] }}</p>
                     </div>
                     @endforeach
                 </div>
@@ -68,7 +70,7 @@
         </div>
 
         <div class="text-center">
-            <a href="{{ route('home') }}" class="text-blue-200 hover:text-white transition-colors text-sm">
+            <a href="{{ route('home') }}" class="text-purple-200 hover:text-white transition-colors text-sm">
                 ← वेबसाइटमा फर्कनुहोस्
             </a>
         </div>

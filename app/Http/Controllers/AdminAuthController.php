@@ -7,24 +7,9 @@ use Illuminate\Http\Request;
 class AdminAuthController extends Controller
 {
     private $adminUsers = [
-        [
-            'email' => 'admin@creative.com',
-            'password' => 'admin123',
-            'name' => 'Admin User',
-            'role' => 'Administrator'
-        ],
-        [
-            'email' => 'manager@creative.com',
-            'password' => 'manager123',
-            'name' => 'Project Manager',
-            'role' => 'Manager'
-        ],
-        [
-            'email' => 'supervisor@creative.com',
-            'password' => 'supervisor123',
-            'name' => 'Creative Supervisor',
-            'role' => 'Supervisor'
-        ]
+        ['email' => 'admin@nepalresult.gov.np', 'password' => 'admin123', 'name' => 'System Administrator', 'role' => 'Super Admin'],
+        ['email' => 'manager@nepalresult.gov.np', 'password' => 'manager123', 'name' => 'Result Manager', 'role' => 'Manager'],
+        ['email' => 'supervisor@nepalresult.gov.np', 'password' => 'supervisor123', 'name' => 'Education Supervisor', 'role' => 'Supervisor']
     ];
 
     public function showLogin()
@@ -38,8 +23,8 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
+        $email = $request->email;
+        $password = $request->password;
 
         foreach ($this->adminUsers as $user) {
             if ($user['email'] === $email && $user['password'] === $password) {
@@ -51,7 +36,7 @@ class AdminAuthController extends Controller
             }
         }
 
-        return back()->with('error', 'Invalid credentials');
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function logout()
